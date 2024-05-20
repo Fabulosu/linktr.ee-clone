@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { SessionProvider } from "next-auth/react";
-import { getServerSession } from "next-auth";
-import { authConfig } from "@/utils/auth";
+import { ThemeProvider } from "next-themes";
+import { cn } from "@/lib/utils";
+import AuthProvider from "@/utils/SessionProvider";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -17,13 +17,24 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getServerSession(authConfig);
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <SessionProvider session={session}>
-          {children}
-        </SessionProvider>
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          inter.variable
+        )}
+      >
+        <AuthProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   );
