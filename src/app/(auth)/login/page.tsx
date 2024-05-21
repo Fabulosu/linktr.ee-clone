@@ -41,7 +41,7 @@ export default function LoginPage(props: Props) {
                 <h1 className="font-bold text-3xl">Welcome back!</h1>
                 <p className="text-muted-foreground">Log in to your Linktree.</p>
                 <Separator className="w-1/2 mb-4 pt-1 mt-1" />
-                <Input type="string" name="username" placeholder="Email or username" className="w-5/6 md:w-2/4 mt-5 text-base font-semibold" ref={usernameRef} required={true} />
+                <Input type="text" name="username" placeholder="Email or username" className="w-5/6 md:w-2/4 mt-5 text-base font-semibold" ref={usernameRef} required={true} />
                 <Input type="password" name="password" placeholder="Password" className="w-5/6 md:w-2/4 mt-2 text-base font-semibold" ref={passRef} required={true} />
                 {!!props.searchParams?.error && <p className="text-red-600">Authentication failed!</p>}
                 <Button type="submit" className="w-5/6 md:w-2/4 mt-2">Log in</Button>

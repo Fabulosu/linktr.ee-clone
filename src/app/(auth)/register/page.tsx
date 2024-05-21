@@ -4,26 +4,37 @@ import { Button } from "@/components/ui/button";
 import { useRef, useState } from "react";
 import axios from "axios";
 import { useSession } from "next-auth/react";
-import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { Separator } from "@/components/ui/separator";
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function RegisterPage() {
 
     const { data: session } = useSession();
     const router = useRouter();
 
-    useEffect(() => {
-        if (session) {
-            router.replace('/');
-        }
-    }, [session, router]);
-
     const [errorMessage, setErrorMessage] = useState('');
+
+    const searchParams = useSearchParams();
+    const result = searchParams.get('username');
+
     const usernameRef = useRef<HTMLInputElement>(null);
     const emailRef = useRef<HTMLInputElement>(null);
     const passRef = useRef<HTMLInputElement>(null);
     const cpassRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        if (session) {
+            router.replace('/');
+        }
+
+        if (result) {
+            if (usernameRef.current !== null) {
+                usernameRef.current.value = result;
+            }
+        }
+
+    }, [session, router, result]);
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -65,15 +76,14 @@ export default function RegisterPage() {
                 <Separator className="w-1/2 mb-4 pt-1 mt-1" />
                 <div className="flex items-center w-full">
                     <span className="text-default pl-[251px] pt-[1px]">linktr.ee/</span>
-                    <Input className="-ml-[73px] w-5/6 md:w-2/4 mr-3 bg-transparent pl-[74px] text-md" placeholder="yourname" ref={usernameRef} required={true} maxLength={10} />
+                    <Input className="-ml-[73px] w-5/6 md:w-2/4 mr-3 bg-transparent pl-[74px] text-md" type="text" placeholder="yourname" ref={usernameRef} required={true} maxLength={10} />
                 </div>
-                <Input type="email" name="email" placeholder="Enter your email" className="w-5/6 md:w-2/4 mt-2 text-base font-semibold" ref={emailRef} />
-                <Input type="password" name="password" placeholder="Enter your password" className="w-5/6 md:w-2/4 mt-2 text-base font-semibold" ref={passRef} />
-                <Input type="password" name="cpass" placeholder="Confirm your password" className="w-5/6 md:w-2/4 mt-2 text-base font-semibold" ref={cpassRef} />
+                <Input type="email" name="email" placeholder="Email" className="w-5/6 md:w-2/4 mt-2 text-base font-semibold" ref={emailRef} />
+                <Input type="password" name="password" placeholder="Password" className="w-5/6 md:w-2/4 mt-2 text-base font-semibold" ref={passRef} />
+                <Input type="password" name="cpass" placeholder="Confirm password" className="w-5/6 md:w-2/4 mt-2 text-base font-semibold" ref={cpassRef} />
                 {errorMessage && <p className="w-5/6 md:w-2/4 text-center p-3 bg-red-400 rounded-md mt-2 text-red-600 font-bold">{errorMessage}</p>}
                 <Button type="submit" className="w-5/6 md:w-2/4 mt-2">Create account</Button>
                 <p className="pt-3 text-muted-foreground">You have an account? <a href="login" className="transition-all ease-linear duration-200 text-primary hover:text-muted-foreground">Login</a></p>
-
             </form>
         </div>
     )
