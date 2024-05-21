@@ -4,12 +4,13 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { buttonVariants } from "./ui/button";
 import ThemeSelector from "./themeselector";
-import NavbarUser from "./ui/navbar-user";
+import NavbarUser from "./navbar-user";
+import ToggleNavbar from "./small-navbar";
 
 const Navbar = () => {
     return (
         <nav className="z-10 sticky top-0 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-            <div className="container flex justify-around h-24 w-full lg:w-3/4 items-center">
+            <div className="container flex justify-around h-16 lg:h-24 w-full lg:w-3/4 items-center">
                 <div className="flex items-center space-x4 lg:space-x6">
                     <Link href="/" className="flex items-center">
                         <span className="font-bold text-xl">Linktr.ee</span>
@@ -18,6 +19,7 @@ const Navbar = () => {
                 <div className="flex flex-1 items-center justify-end space-x-2">
                     <div className="flex items-center">
                         <Link
+                            className="hidden lg:flex"
                             href="#"
                         >
                             <div
@@ -30,6 +32,7 @@ const Navbar = () => {
                             </div>
                         </Link>
                         <Link
+                            className="hidden lg:flex"
                             href="#"
                         >
                             <div
@@ -42,6 +45,7 @@ const Navbar = () => {
                             </div>
                         </Link>
                         <Link
+                            className="hidden lg:flex"
                             href="#"
                         >
                             <div
@@ -54,7 +58,8 @@ const Navbar = () => {
                             </div>
                         </Link>
                         <ThemeSelector />
-                        <NavbarUser />
+                        <NavbarUser className='hidden lg:flex' />
+                        <ToggleNavbar />
                     </div>
                 </div>
             </div>

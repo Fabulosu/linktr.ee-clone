@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import RotatingImage from "@/components/ui/main-image";
+import RotatingImage from "@/components/main-image";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 
@@ -19,9 +19,9 @@ export default function Home() {
   }
 
   return (
-    <main className="flex flex-row items-center justify-center px-5 md:px-8 mt-32 md:mt-40 w-full lg:w-3/4 z-[20] container">
+    <main className="flex flex-col lg:flex-row items-center justify-center px-5 md:px-8 mt-10 lg:mt-32 md:mt-40 w-full lg:w-3/4 z-[20] container">
       <div className="h-full w-full lg:w-3/4 flex flex-col gap-5 justify-center m-auto text-start">
-        <div className="flex flex-col gap-6 mt-6 text-7xl font-bold text-foreground max-w-[600px] w-auto h-auto">
+        <div className="flex flex-col gap-6 lg:mt-6 text-5xl lg:text-7xl font-bold text-foreground max-w-[600px]">
           <h1>Everything you are. In one, simple link in bio.</h1>
         </div>
         <p className="text-lg text-muted-foreground my-5 max-w-[600px]">Join 40M+ people using Linktree for their link in bio. One link to help you share everything you create, curate and sell from your Instagram, TikTok, Twitter, YouTube and other social media profiles.</p>

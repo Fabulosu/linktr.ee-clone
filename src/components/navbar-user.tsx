@@ -1,12 +1,12 @@
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import React from 'react';
-import { buttonVariants } from './button';
+import { buttonVariants } from './ui/button';
 import { cn } from '@/lib/utils';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from './dropdown-menu';
-import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu';
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
-const NavbarUser = () => {
+const NavbarUser = (props: any) => {
     const { data: session, status } = useSession();
     if (status !== 'loading') {
 
@@ -14,15 +14,15 @@ const NavbarUser = () => {
             await signOut();
         }
         return (
-            <div>
+            <div className={props.className || "" + " h-full w-full"}>
                 {status === 'authenticated' && session && (
-                    <div className="pl-2">
+                    <div className="lg:pl-2 lg:pb-0 flex justify-center items-end h-full pb-5 w-full">
                         <DropdownMenu>
-                            <DropdownMenuTrigger className="border-none outline-none">
+                            <DropdownMenuTrigger className="border-none outline-none w-full">
                                 <div
                                     className={cn(
                                         buttonVariants({ variant: "ghost" }),
-                                        "w-24 px-0"
+                                        "lg:w-24 w-full flex justify-around lg:justify-center px-0"
                                     )}
                                 >
                                     <h2 className="text-primary font-semibold text-md">{session.user.username}</h2>
@@ -43,7 +43,7 @@ const NavbarUser = () => {
                     </div>
                 )}
                 {status === 'unauthenticated' && (
-                    <div>
+                    <div className='flex lg:items-center lg:pb-0 flex-row h-full items-end pb-5 justify-between'>
                         <Link className="ml-2"
                             href="/login"
                         >
