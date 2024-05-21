@@ -15,7 +15,7 @@ export default function RegisterPage() {
 
     useEffect(() => {
         if (session) {
-            router.replace('/forums');
+            router.replace('/');
         }
     }, [session, router]);
 

@@ -18,7 +18,7 @@ export default function LoginPage(props: Props) {
 
     useEffect(() => {
         if (session) {
-            router.replace('/forums');
+            router.replace('/');
         }
     }, [session, router]);
 
