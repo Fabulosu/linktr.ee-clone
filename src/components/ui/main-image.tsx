@@ -7,7 +7,6 @@ interface RotatingImageProps {
 }
 
 const RotatingImage: React.FC<RotatingImageProps> = ({ src, alt }) => {
-    const [imageCenter, setImageCenter] = useState({ x: 0, y: 0 });
     const [innerWidth, setInnerWidth] = useState(0);
     const [innerHeight, setInnerHeight] = useState(0);
     const mouseX = useMotionValue(0);
@@ -35,10 +34,6 @@ const RotatingImage: React.FC<RotatingImageProps> = ({ src, alt }) => {
 
     const handleImageLoad = (event: React.SyntheticEvent<HTMLImageElement>) => {
         const rect = event.currentTarget.getBoundingClientRect();
-        setImageCenter({
-            x: rect.left + rect.width / 2,
-            y: rect.top + rect.height / 2,
-        });
     };
 
     return (

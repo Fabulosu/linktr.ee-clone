@@ -5,9 +5,9 @@ import { UserModel } from "./models";
 import bcrypt from "bcrypt";
 
 export const authConfig: NextAuthOptions = {
-    // pages: {
-    //     signIn: '/login'
-    // },
+    pages: {
+        signIn: '/login'
+    },
     providers: [
         CredentialsProvider({
             name: 'credentials',
@@ -23,7 +23,12 @@ export const authConfig: NextAuthOptions = {
                 if (!credentials || !credentials.email || !credentials.password)
                     return null;
                 await dbConnect();
-                const user = await UserModel.findOne({ email: credentials.email });
+                const user = await UserModel.findOne({
+                    $or: [
+                        { email: credentials.email },
+                        { username: credentials.email }
+                    ]
+                })
                 if (user && bcrypt.compareSync(credentials.password, user.password)) {
                     return { id: user._id, username: user.username, name: user.name, email: user.email, avatarURL: user.avatarURL }
                 }

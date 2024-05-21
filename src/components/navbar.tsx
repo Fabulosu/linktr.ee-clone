@@ -1,10 +1,10 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { FaGithub, FaRss } from "react-icons/fa";
 import { buttonVariants } from "./ui/button";
-import { FaXTwitter } from "react-icons/fa6";
 import ThemeSelector from "./themeselector";
-import Image from "next/image";
+import NavbarUser from "./ui/navbar-user";
 
 const Navbar = () => {
     return (
@@ -54,30 +54,7 @@ const Navbar = () => {
                             </div>
                         </Link>
                         <ThemeSelector />
-                        <Link className="ml-2"
-                            href="#"
-                        >
-                            <div
-                                className={cn(
-                                    buttonVariants({ variant: "secondary" }),
-                                    "w-24 px-0"
-                                )}
-                            >
-                                <p className="font-bold">Log in</p>
-                            </div>
-                        </Link>
-                        <Link className="ml-2"
-                            href="#"
-                        >
-                            <div
-                                className={cn(
-                                    buttonVariants({ variant: "default" }),
-                                    "w-24 px-0"
-                                )}
-                            >
-                                <p className="font-bold">Sign up free</p>
-                            </div>
-                        </Link>
+                        <NavbarUser />
                     </div>
                 </div>
             </div>
