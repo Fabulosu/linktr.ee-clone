@@ -2,7 +2,7 @@
 import React from 'react';
 import { useSession } from 'next-auth/react';
 
-const LoadingScreen = ({ children }: any) => {
+const LoadingProvider = ({ children }: any) => {
     const { data: session, status } = useSession();
 
     if (status === 'loading') {
@@ -12,4 +12,4 @@ const LoadingScreen = ({ children }: any) => {
     }
 }
 
-export default LoadingScreen;
+export default LoadingProvider;
