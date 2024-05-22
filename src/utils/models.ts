@@ -15,6 +15,9 @@ const userSchema = new Schema({
     uuid: { type: String, required: true },
     name: String,
     settings: Array,
+    biography: String,
+    theme: { type: Number, required: true },
+    icons_position: { type: Number, required: true },
 }, { timestamps: true });
 
 const linkSchema = new Schema({
@@ -23,6 +26,7 @@ const linkSchema = new Schema({
     enabled: Boolean,
     thumbnail: String,
     settings: Array,
+    archived: Boolean,
 }, { timestamps: true });
 
 const headerSchema = new Schema({
@@ -30,8 +34,14 @@ const headerSchema = new Schema({
     enabled: Boolean,
 }, { timestamps: true });
 
+const iconSchema = new Schema({
+    url: reqString,
+    enabled: Boolean,
+}, { timestamps: true });
+
 const UserModel = models.User || model("User", userSchema);
 const LinkModel = models.Link || model("Link", linkSchema);
 const HeaderModel = models.Header || model("Header", headerSchema);
+const IconModel = models.Icon || model("Icon", iconSchema);
 
-export { UserModel, LinkModel, HeaderModel };
+export { UserModel, LinkModel, HeaderModel, IconModel };
