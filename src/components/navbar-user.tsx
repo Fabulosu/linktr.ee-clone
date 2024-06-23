@@ -35,8 +35,8 @@ const NavbarUser = (props: any) => {
                             <DropdownMenuContent>
                                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                                 <DropdownMenuSeparator />
-                                <DropdownMenuItem>Admin</DropdownMenuItem>
-                                <Link href=""><DropdownMenuItem>Settings</DropdownMenuItem></Link>
+                                <Link href="/admin"><DropdownMenuItem>Admin</DropdownMenuItem></Link>
+                                <Link href="/settings"><DropdownMenuItem>Settings</DropdownMenuItem></Link>
                                 <Link href="" onClick={handleSignOut}><DropdownMenuItem className='text-red-600'>Sign out</DropdownMenuItem></Link>
                             </DropdownMenuContent>
                         </DropdownMenu>

@@ -21,20 +21,24 @@ const userSchema = new Schema({
 }, { timestamps: true });
 
 const linkSchema = new Schema({
+    user: { type: String, required: true },
     title: reqString,
     url: reqString,
+    order: { type: Number, required: true },
     enabled: Boolean,
     thumbnail: String,
-    settings: Array,
     archived: Boolean,
 }, { timestamps: true });
 
 const headerSchema = new Schema({
+    user: { type: String, required: true },
     title: reqString,
     enabled: Boolean,
+    order: { type: Number, required: true },
 }, { timestamps: true });
 
 const iconSchema = new Schema({
+    user: { type: String, required: true },
     url: reqString,
     enabled: Boolean,
 }, { timestamps: true });

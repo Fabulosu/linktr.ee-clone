@@ -20,10 +20,10 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "bg-background font-sans antialiased",
           inter.variable
         )}
       >
@@ -35,7 +35,6 @@ export default async function RootLayout({
             disableTransitionOnChange
           >
             <LoadingProvider>
-              <Navbar />
               {children}
             </LoadingProvider>
           </ThemeProvider>
