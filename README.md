@@ -49,22 +49,22 @@ This project is a clone of the popular Linktr.ee platform, built with Next.js, N
 ## Getting Started
 **To get started with the project, follow these steps:**
 
-1. **Clone the repository:**
+**1.Clone the repository:**
 ```bash
 git clone https://github.com/Fabulosu/linktr.ee-clone.git
 cd linktree-clone
 ```
 
-2. **Install dependencies:**
+**2.Install dependencies:**
 ```bash
 npm install
 ```
 
-3.**Set up environment variables:**
+**3.Set up environment variables:**
 
 Create a .env file in the root of the project and add the necessary environment variables.
 
-4.**Run the development server:**
+**4.Run the development server:**
 
 ```bash
 npm run dev
