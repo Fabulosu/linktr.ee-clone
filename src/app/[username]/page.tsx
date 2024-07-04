@@ -127,8 +127,8 @@ export default function UserPage({ params }: { params: { username: string } }) {
                         <AvatarFallback>{userData.name.at(0)}</AvatarFallback>
                     </Avatar>
                 </div>
-                <h1 className='text-2xl font-black'>{userData.name}</h1>
-                <p className='font-black text-lg text-center'>{userData.description}</p>
+                <h1 className='text-2xl font-black text-white'>{userData.name}</h1>
+                <p className='font-black text-lg text-white text-center'>{userData.description}</p>
                 {userData.links && userData.links.length > 0 ? (
                     <div className='flex flex-col gap-5'>
                         {userData.links.sort((a, b) => a.order - b.order).map((link) => (
@@ -150,7 +150,7 @@ export default function UserPage({ params }: { params: { username: string } }) {
                 ) : (
                     <p>No links available.</p>
                 )}
-                <div className='flex flex-row gap-6 justify-center h-[50px] w-full items-center'>
+                <div className='flex flex-row gap-6 justify-center h-[50px] w-full items-center text-white'>
                     <FaXTwitter size={25} className='hover:cursor-pointer hover:size-9 transition-all ease-in duration-200' />
                     <FaXTwitter size={25} className='hover:cursor-pointer hover:size-9 transition-all ease-in duration-200' />
                     <FaXTwitter size={25} className='hover:cursor-pointer hover:size-9 transition-all ease-in duration-200' />
