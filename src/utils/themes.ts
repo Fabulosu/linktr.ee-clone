@@ -3,19 +3,19 @@ const themes = [
     id: 1,
     name: "Theme #1",
     background: "https://i.imgur.com/iO4oFzi.gif",
-    style: "border-2 border-white rounded-full hover:text-black hover:bg-white shadow-[0px_10px_0px_0px_rgba(0,0,0)]",
+    style: "border-2 border-white rounded-full text-white hover:text-black hover:bg-white shadow-[0px_10px_0px_0px_rgba(0,0,0)]",
   },
   {
     id: 2,
     name: "Theme #2",
     background: "https://i.imgur.com/tWn5VSj.gif",
-    style: "border-2 border-white rounded-sm hover:text-black hover:bg-white shadow-[0px_10px_0px_0px_rgba(0,0,0)]",
+    style: "border-2 border-white rounded-sm text-white hover:text-black hover:bg-white shadow-[0px_10px_0px_0px_rgba(0,0,0)]",
   },
   {
     id: 3,
     name: "Theme #3",
     background: "https://i.imgur.com/kJwDd9H.gif",
-    style: "border-2 border-white hover:text-black hover:bg-white shadow-[0px_10px_0px_0px_rgba(0,0,0)]",
+    style: "border-2 border-white hover:text-black text-white hover:bg-white shadow-[0px_10px_0px_0px_rgba(0,0,0)]",
   },
 ];
 

@@ -125,7 +125,7 @@ const EditableLink: React.FC<Props> = ({ id, title, url, enabled, thumbnail, han
                     </div>
                     <div className='flex flex-row items-center gap-2'>
                         <input
-                            className="p-1 w-[150px] md:w-[300px] rounded-sm bg-transparent text-xs md:text-md font-semibold"
+                            className="p-1 w-[150px] md:w-[300px] rounded-sm bg-transparent text-xs md:text-base font-semibold"
                             type="text"
                             ref={urlRef}
                             defaultValue={url}
