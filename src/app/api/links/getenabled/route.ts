@@ -7,8 +7,8 @@ export async function GET(req: NextRequest, res: NextResponse) {
     const userId = url.searchParams.get("userId");
 
     await dbConnect();
-    const links = await LinkModel.find({ user: userId });
-    console.log({ links })
+    const links = await LinkModel.find({ user: userId, archived: false, enabled: true });
+    // console.log({ links })
     if (links) return NextResponse.json({ success: true, links: links });
     else return NextResponse.json({ success: false, message: "This account doesn't exist!" }, { status: 200 });
 }

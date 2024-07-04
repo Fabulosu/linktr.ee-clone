@@ -30,7 +30,7 @@ export const authConfig: NextAuthOptions = {
                     ]
                 })
                 if (user && bcrypt.compareSync(credentials.password, user.password)) {
-                    return { id: user._id, username: user.username, name: user.name, email: user.email, avatarURL: user.avatarURL }
+                    return { id: user._id, username: user.username, name: user.name, email: user.email, avatarURL: user.avatarURL, description: user.description }
                 }
 
                 return null;
@@ -38,12 +38,21 @@ export const authConfig: NextAuthOptions = {
         }),
     ],
     callbacks: {
-        async jwt({ token, user }) {
+        async jwt({ token, user, account, profile, trigger, isNewUser, session }) {
+            if (trigger === "update") {
+                if (session?.avatarURL) {
+                    token.avatarURL = session.avatarURL;
+                    console.log(token.avatarURL);
+                } else if (session?.name) {
+                    token.name = session.name;
+                }
+            }
             if (user) {
                 token.username = user.username;
                 token.email = user.email;
                 token.id = user.id;
                 token.avatarURL = user.avatarURL;
+                token.description = user.description;
             }
             return token;
         },
@@ -54,6 +63,7 @@ export const authConfig: NextAuthOptions = {
                 session.user.id = token.id;
                 session.user.email = token.email;
                 session.user.avatarURL = token.avatarURL;
+                session.user.description = token.description;
             }
             return session;
         }

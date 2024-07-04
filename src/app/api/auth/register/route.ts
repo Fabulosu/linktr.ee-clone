@@ -14,8 +14,22 @@ export async function POST(req: Request, res: NextResponse) {
         const newUser = new UserModel({
             username: username,
             email: email,
+            name: username,
             password: hashedPass,
             activated: 0,
+            theme: 0,
+            custom_theme: {
+                bgStyle: 1,
+                bgColor: "#000",
+                bgImage: "none",
+                buttonStyle: 0,
+                buttonColor: "#fff",
+                buttonHoverColor: "#333",
+                buttonFontColor: "#000",
+                buttonFontHoverColor: "#fff",
+                buttonFont: "sans",
+            },
+            icons_position: 0,
             uuid: uuidv4(),
         });
         await newUser.save();

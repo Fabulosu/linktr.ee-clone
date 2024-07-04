@@ -4,8 +4,6 @@ import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { cn } from "@/lib/utils";
 import AuthProvider from "@/utils/SessionProvider";
-import Navbar from "@/components/navbar";
-import LoadingProvider from "@/utils/LoadingProvider";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -34,9 +32,7 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <LoadingProvider>
-              {children}
-            </LoadingProvider>
+            {children}
           </ThemeProvider>
         </AuthProvider>
       </body>

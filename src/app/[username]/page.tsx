@@ -1,8 +1,10 @@
 "use client";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Image from 'next/image';
+import { themes } from '@/utils/themes';
 import UserLink from '@/components/ui/user-link';
+import { FaXTwitter } from 'react-icons/fa6';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 interface Link {
     _id: string;
@@ -12,6 +14,18 @@ interface Link {
     thumbnail: string;
 }
 
+interface CustomTheme {
+    bgStyle: number;
+    bgColor: string;
+    bgImage: string;
+    buttonStyle: number;
+    buttonColor: string;
+    buttonHoverColor: string;
+    buttonFontColor: string;
+    buttonFontHoverColor: string;
+    buttonFont: string;
+}
+
 interface UserData {
     _id: string;
     username: string;
@@ -19,7 +33,10 @@ interface UserData {
     name: string;
     avatarURL: string;
     backgroundURL: string;
+    description: string;
+    theme: number;
     links: Link[];
+    custom_theme: CustomTheme;
 }
 
 export default function UserPage({ params }: { params: { username: string } }) {
@@ -34,7 +51,7 @@ export default function UserPage({ params }: { params: { username: string } }) {
                 if (response) {
                     setUserData(response.data.user);
 
-                    const getLinks = await axios.get(`/api/links/get?userId=${response.data.user._id}`);
+                    const getLinks = await axios.get(`/api/links/getenabled?userId=${response.data.user._id}`);
                     if (getLinks) setUserData((prevUserData: any) => {
                         return {
                             ...prevUserData,
@@ -54,26 +71,91 @@ export default function UserPage({ params }: { params: { username: string } }) {
     }, [username]);
 
     if (!userData) {
-        return <h1 className='flex justify-center items-center font-bold text-white h-min'>Loading...</h1>;
+        return <h1 className='flex justify-center items-center font-bold text-white h-[98vh]'>Loading...</h1>;
+    }
+
+    const lightenColor = (hex: string, percent: number) => {
+        const num = parseInt(hex.slice(1), 16);
+        const r = (num >> 16) + Math.round(2.55 * percent);
+        const g = (num >> 8 & 0x00FF) + Math.round(2.55 * percent);
+        const b = (num & 0x0000FF) + Math.round(2.55 * percent);
+
+        const newR = (r < 255 ? r < 1 ? 0 : r : 255).toString(16).padStart(2, '0');
+        const newG = (g < 255 ? g < 1 ? 0 : g : 255).toString(16).padStart(2, '0');
+        const newB = (b < 255 ? b < 1 ? 0 : b : 255).toString(16).padStart(2, '0');
+
+        return `#${newR}${newG}${newB}`;
+    }
+
+    const getBackground = () => {
+        if (userData.theme === 0) {
+            switch (userData.custom_theme.bgStyle) {
+                case 1:
+                    return { backgroundColor: userData.custom_theme.bgColor };
+                case 2:
+                    return { background: `linear-gradient(to top, ${userData.custom_theme.bgColor}, ${lightenColor(userData.custom_theme.bgColor, 40)})` }
+                case 3:
+                    return { backgroundImage: `url('${userData.custom_theme.bgImage}')`, backgroundSize: 'cover' };
+                case 4:
+                    return { background: `repeating-linear-gradient(45deg, ${userData.custom_theme.bgColor}, ${userData.custom_theme.bgColor} 10px, ${lightenColor(userData.custom_theme.bgColor, 30)} 10px, ${lightenColor(userData.custom_theme.bgColor, 30)} 20px)` };
+                default:
+                    break;
+            }
+        } else {
+            if (themes[userData.theme - 1].background.startsWith("#")) {
+                return { backgroundColor: themes[userData.theme - 1].background };
+            } else {
+                return { backgroundImage: `url('${themes[userData.theme - 1].background}')`, backgroundSize: 'cover' };
+            }
+        }
+    }
+
+    const getThemeStyle = () => {
+        if (userData.theme !== 0) {
+            return themes[userData.theme - 1].style;
+        } else {
+            return '';
+        }
     }
 
     return (
-        <div className='w-screen h-screen' style={{ backgroundImage: `url('${userData.backgroundURL}')`, backgroundSize: 'cover' }}>
-            <div className="flex flex-col lg:flex-col gap-5 items-center justify-center px-5 pt-28 md:px-8 w-full lg:w-3/4 z-[20] container">
+        <div className='w-screen h-[100vh] overflow-hidden overflow-y-auto' style={getBackground()}>
+            <div className="flex flex-col lg:flex-col gap-5 items-center justify-center px-5 pt-14 md:pt-28 md:px-8 w-full lg:w-3/4 z-[20] container">
                 <div>
-                    <Image src={`${userData.avatarURL}`} width={128} height={128} alt={userData.username + "' logo"} priority={true} className='rounded-full' />
+                    <Avatar className="rounded-full w-24 h-24 md:w-32 md:h-32" >
+                        <AvatarImage src={userData.avatarURL} alt={`${userData.username}'s avatar`} />
+                        <AvatarFallback>{userData.name.at(0)}</AvatarFallback>
+                    </Avatar>
                 </div>
-                <h1 className='text-2xl font-black'>{userData.username.toUpperCase()}</h1>
-                <p className='font-black text-lg'>Lorem ipsum dolor sit amet consecte</p>
+                <h1 className='text-2xl font-black'>{userData.name}</h1>
+                <p className='font-black text-lg text-center'>{userData.description}</p>
                 {userData.links && userData.links.length > 0 ? (
                     <div className='flex flex-col gap-5'>
                         {userData.links.sort((a, b) => a.order - b.order).map((link) => (
-                            <UserLink key={link._id} icon={link.thumbnail} url={link.url} title={link.title} />
+                            <UserLink
+                                key={link._id}
+                                icon={link.thumbnail}
+                                url={link.url}
+                                title={link.title}
+                                themeStyle={getThemeStyle()}
+                                buttonStyle={userData.custom_theme.buttonStyle}
+                                buttonColor={userData.custom_theme.buttonColor}
+                                buttonHoverColor={userData.custom_theme.buttonHoverColor}
+                                buttonFont={userData.custom_theme.buttonFont}
+                                buttonFontColor={userData.custom_theme.buttonFontColor}
+                                buttonFontHoverColor={userData.custom_theme.buttonFontHoverColor}
+                            />
                         ))}
                     </div>
                 ) : (
                     <p>No links available.</p>
                 )}
+                <div className='flex flex-row gap-6 justify-center h-[50px] w-full items-center'>
+                    <FaXTwitter size={25} className='hover:cursor-pointer hover:size-9 transition-all ease-in duration-200' />
+                    <FaXTwitter size={25} className='hover:cursor-pointer hover:size-9 transition-all ease-in duration-200' />
+                    <FaXTwitter size={25} className='hover:cursor-pointer hover:size-9 transition-all ease-in duration-200' />
+                    <FaXTwitter size={25} className='hover:cursor-pointer hover:size-9 transition-all ease-in duration-200' />
+                </div>
             </div>
         </div >
     )

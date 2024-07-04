@@ -1,4 +1,5 @@
 import Navbar from "@/components/navbar";
+import LoadingProvider from "@/utils/LoadingProvider";
 
 export default async function NavLayout({
     children,
@@ -6,9 +7,9 @@ export default async function NavLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <div>
+        <LoadingProvider>
             <Navbar />
             {children}
-        </div>
+        </LoadingProvider>
     )
 }

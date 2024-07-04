@@ -27,8 +27,8 @@ const NavbarUser = (props: any) => {
                                 >
                                     <h2 className="text-primary font-semibold text-md">{session.user.username}</h2>
                                     <Avatar className='w-5 h-5 ml-2'>
-                                        <AvatarImage src="https://github.com/shadcn.png" />
-                                        <AvatarFallback>CN</AvatarFallback>
+                                        <AvatarImage src={session.user.avatarURL} />
+                                        <AvatarFallback className='text-md'>{session.user.username.at(0)}</AvatarFallback>
                                     </Avatar>
                                 </div>
                             </DropdownMenuTrigger>
