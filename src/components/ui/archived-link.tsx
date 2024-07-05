@@ -35,8 +35,8 @@ const ArchivedLink: React.FC<Props> = ({ id, title, url, onChange }) => {
                 <div className="flex flex-row items-center gap-2">
                     <p className="p-1 text-base sm:text-xl font-bold">{title}</p>
                 </div>
-                <div className="flex flex-row items-center gap-2 w-[160px]">
-                    <p className="p-1 text-xs sm:text-md overflow-hidden font-semibold">{url}</p>
+                <div className="flex flex-row items-center gap-2 w-[160px] sm:w-[300px]">
+                    <p className="p-1 text-xs sm:text-base overflow-hidden font-semibold">{url}</p>
                 </div>
             </div>
             <div className='w-20 flex flex-row items-end p-2 justify-center h-full gap-2'>
