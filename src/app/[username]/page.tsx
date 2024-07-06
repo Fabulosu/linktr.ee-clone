@@ -150,12 +150,6 @@ export default function UserPage({ params }: { params: { username: string } }) {
                 ) : (
                     <p>No links available.</p>
                 )}
-                <div className='flex flex-row gap-6 justify-center h-[50px] w-full items-center text-white'>
-                    <FaXTwitter size={25} className='hover:cursor-pointer hover:size-9 transition-all ease-in duration-200' />
-                    <FaXTwitter size={25} className='hover:cursor-pointer hover:size-9 transition-all ease-in duration-200' />
-                    <FaXTwitter size={25} className='hover:cursor-pointer hover:size-9 transition-all ease-in duration-200' />
-                    <FaXTwitter size={25} className='hover:cursor-pointer hover:size-9 transition-all ease-in duration-200' />
-                </div>
             </div>
         </div >
     )
