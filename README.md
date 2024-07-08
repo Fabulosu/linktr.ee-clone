@@ -29,15 +29,10 @@ This project is a clone of the popular Linktr.ee platform, built with Next.js, N
 ## Pages
 
 - **Index Page** - The landing page of the application.
-
 - **Login and Register Pages** - Dedicated pages for user authentication - login and register.
-
 - **User Page** - Public-facing user page where all the added links are displayed.
-
 - **Admin Page** - Admin interface where users can manage their links, including adding, archiving, restoring, deleting, and reordering them.
-
 - **Archived Links Page** - Page where users can view and manage their archived links.
-
 - **Appearance Page** - Customization interface where users can change the theme, background, avatar, and display name.
 
 ## Technologies Used
@@ -45,6 +40,7 @@ This project is a clone of the popular Linktr.ee platform, built with Next.js, N
 - **NextAuth**: Authentication for Next.js applications.
 - **TailwindCSS**: Utility-first CSS framework for styling the application.
 - **Mongoose**: MongoDB object modeling tool designed to work in an asynchronous environment.
+- **ShadCN UI**: Cutting-edge technology integrated to deliver seamless user experiences with modern web development frameworks and tools.
 
 ## Getting Started
 **To get started with the project, follow these steps:**
